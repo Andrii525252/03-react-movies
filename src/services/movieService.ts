@@ -3,6 +3,10 @@ import type { Movie } from '../types/movie';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 
+interface SearchResponse {
+  results: Movie[];
+}
+
 export const SearchMovie = async (query: string): Promise<Movie[]> => {
   const config = {
     params: { query },
@@ -11,6 +15,9 @@ export const SearchMovie = async (query: string): Promise<Movie[]> => {
     },
   };
 
-  const response = await axios.get(`${BASE_URL}/search/movie`, config);
+  const response = await axios.get<SearchResponse>(
+    `${BASE_URL}/search/movie`,
+    config
+  );
   return response.data.results;
 };
