@@ -3,10 +3,10 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 interface SearchBarProps {
-  action: (formData: FormData) => void;
+  onSubmit: (query: string) => void;
 }
 
-export default function SearchBar({ action }: SearchBarProps) {
+export default function SearchBar({ onSubmit }: SearchBarProps) {
   const [query, setQuery] = useState('');
 
   const handleFormAction = (formData: FormData) => {
@@ -18,7 +18,7 @@ export default function SearchBar({ action }: SearchBarProps) {
       return;
     }
 
-    action(formData);
+    onSubmit(trimmedQuery);
     setQuery('');
   };
 
